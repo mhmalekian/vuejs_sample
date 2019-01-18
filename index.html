@@ -1,0 +1,68 @@
+﻿<html>
+<head>
+    <title>My Sample vue.js</title>
+    <link rel="stylesheet"  href="css/bootstrap.min.css">
+    <script src="js/vue.js"></script>
+</head>
+<body >
+    <div id="app" class="col-sm-4 col-4">
+        <h1> {{ skill }}</h1>
+        <input type="number" class="form-control" v-model="points">
+        <hr>
+        <input type="text" v-model="first">
+        <input type="text"  v-model="last">
+        {{ fullname }}
+        <div>
+            <h1>Directiv</h1>
+            <p v-text="mytext"></p>
+            <p v-html="myhtml"></p>
+            <p v-if="flag"> Flag is TRUE!</p>
+            <p v-else="flag">Flag is False!</p>
+            <p>my array</p>
+            <ul v-for="item in myarray"><li v-text="item"></li></ul>
+
+            <p>Bind</p>
+            <a :href="url" :title="wikititle"> ویکی گرام</a>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                //skill: "mobtadi",
+                points: 50,
+                first: "mh",
+                last: "malekian",
+                mytext: "mhm text",
+                myhtml: "<span style='color: red;'>MyHtml</span>",
+                flag: false,
+                myarray: [ 'one','two','three','four'],
+                url: "https://wikigeram.com",
+                wikititle: "ویکی گرام"
+            },
+            computed: {  //catch in server and dont need to run again!!! in the compare of method
+                skill: function(){
+                    if(this.points < 100)
+                    {
+                        return "Amature";
+                    }
+                    else
+                    {
+                        return "Proffesional";
+                    }
+
+                },
+                fullname: function () {
+                    return this.first+ " " + this.last;
+                }
+            },
+            watch: { //
+
+            }
+
+        });
+
+    </script>
+</body>
+</html>

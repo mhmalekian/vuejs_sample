@@ -1,0 +1,70 @@
+﻿<html>
+<head>
+    <title>My Sale Sample vue.js</title>
+    <link rel="stylesheet"  href="css/bootstrap.min.css">
+    <script src="js/vue.js"></script>
+</head>
+<body >
+    <div id="app" >
+        <ul class="list-group">
+            <li v-for="plan in plans">
+                <plan :plan="plan" @activate="setActive(plan)" :active="actived"></plan>
+            </li>
+        </ul>
+    </div>
+
+    <template id="plan-template">
+        <div class="col-sm-4 col-4">
+            {{ plan.name }}: ${{ plan.price }} -
+            <button  class="btn btn-primary btn-sm" @click="activate" v-if="!isActive" > {{ isUpgrade ? "Upgrade" : "Downgrade" }}</button>
+            <button v-else class="btn btn-primary btn-sm" disabled> Selected </button>
+        </div>
+    </template>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                //skill: "mobtadi",
+                plans: [
+                    {name: "Ultimate" , price: 500},
+                    {name: "Expert" , price: 100},
+                    {name: "Professional" , price: 50},
+                    {name: "Simple" , price: 10},
+                    {name: "Free" , price: 0},
+                ],
+                actived: {}
+
+            },
+            methods:{
+                setActive: function(plan){
+                    this.actived=plan;
+                }
+
+            },
+            components:{
+                plan: {
+                    template: "#plan-template",
+                    props: ['plan','active'],
+                    methods: {
+                        activate: function(){
+                            this.$emit('activate',this.plan);
+                        }
+                    },
+                    computed:{
+                        isActive: function(){
+                            return (this.active==this.plan);
+                        },
+                        isUpgrade: function () {
+                            
+                        }
+                    }
+
+                }
+            }
+
+        });
+
+    </script>
+</body>
+</html>
