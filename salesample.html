@@ -5,19 +5,19 @@
     <script src="js/vue.js"></script>
 </head>
 <body >
-    <div id="app" >
-        <ul class="list-group">
-            <li v-for="plan in plans">
+    <div id="app"  >
+        <ul class="list-group" class="col-sm-4 col-4">
+            <li v-for="plan in plans" class="list-group-item">
                 <plan :plan="plan" @activate="setActive(plan)" :active="actived"></plan>
             </li>
         </ul>
     </div>
 
     <template id="plan-template">
-        <div class="col-sm-4 col-4">
+        <div >
             {{ plan.name }}: ${{ plan.price }} -
-            <button  class="btn btn-primary btn-sm" @click="activate" v-if="!isActive" > {{ isUpgrade ? "Upgrade" : "Downgrade" }}</button>
-            <button v-else class="btn btn-primary btn-sm" disabled> Selected </button>
+            <button  class="btn btn-primary btn-sm m-2" @click="activate" v-if="!isActive" > {{ isUpgrade ? "Upgrade" : "Downgrade" }}</button>
+            <button v-else class="btn btn-primary btn-sm m-2" disabled> Selected </button>
         </div>
     </template>
 
@@ -56,7 +56,7 @@
                             return (this.active==this.plan);
                         },
                         isUpgrade: function () {
-                            
+                            return (this.active.price<this.plan.price);
                         }
                     }
 
